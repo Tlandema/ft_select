@@ -1,47 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   padding.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/12 14:21:49 by tlandema          #+#    #+#             */
-/*   Updated: 2019/04/26 20:58:43 by tlandema         ###   ########.fr       */
+/*   Created: 2019/04/26 18:15:38 by tlandema          #+#    #+#             */
+/*   Updated: 2019/04/26 20:58:37 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_select.h"
+#include <sys/ioctl.h>
 
-static int	ft_shame(void)
+void		ft_print_with_pad(char *name, int size)
 {
-	ft_putchar('\n');
-	return (0);
+	int	i;
+
+	i = (int)ft_strlen(name);
+	ft_putstr_fd(name, STDERR_FILENO);
+	ft_putstr(tgetstr("me", NULL));
+	while (i <= size)
+	{
+		ft_putchar(' ');
+		i++;
+	}
 }
 
-void		ft_print_args(t_trm *trm)
+void	ft_arg_size_max(t_trm *trm)
 {
 	t_arg	*args;
 	t_arg	*first;
 	int		i;
-	int		j;
 
-	ft_arg_size_max(trm);
+	args = trm->args;
+	first = args;
 	i = 0;
-	j = 0;
-	first = trm->args;
-	args = first;
-	ft_putstr_fd(tgetstr("cl", NULL), 0);
 	while (args && (args != first || i == 0))
 	{
-		if (j == trm->nb_p_l)
-			j = ft_shame();
-		if (args == trm->the_arg)
-			ft_putstr(tgetstr("mr", NULL));
-		if (args->selected == 1)
-			ft_putstr(tgetstr("us", NULL));
-		ft_print_with_pad(args->name, trm->size_max);
-		args = args->right;		
+		if ((int)ft_strlen(args->name) > trm->size_max)
+			trm->size_max = ft_strlen(args->name);
+		args = args->right;
 		i = 1;
-		j++;
 	}
+	trm->nb_p_l = (size_tab() / trm->size_max);
+}
+
+int		size_tab(void)
+{
+	struct winsize	w;
+
+	ioctl(STDOUT_FILENO, TIOCGWINSZ, & w);
+	return (w.ws_col);
 }

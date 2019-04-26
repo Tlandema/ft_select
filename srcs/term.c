@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 10:32:08 by tlandema          #+#    #+#             */
-/*   Updated: 2019/04/12 11:49:26 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/04/26 20:32:49 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int     ft_init_term(t_trm *trm)
 		return (-1);
 	tputs(tgetstr("ti", NULL), 1 , ft_printest);
 	tputs(tgetstr("vi", NULL), 1 , ft_printest);
+	trm->size_max = 0;
+	trm->nb_p_l = 0;
 	return (0);
 }
 

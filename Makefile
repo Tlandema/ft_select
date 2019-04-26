@@ -6,7 +6,7 @@
 #    By: tlandema <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by tlandema          #+#    #+#              #
-#    Updated: 2019/04/25 18:50:01 by tlandema         ###   ########.fr        #
+#    Updated: 2019/04/26 18:18:59 by tlandema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCS_PATH = srcs
 SRCS = main.c \
 	   usage.c \
 	   actions.c \
+	   padding.c \
 	   args.c \
 	   utils.c \
 	   print.c \
