@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 06:45:11 by tlandema          #+#    #+#             */
-/*   Updated: 2019/04/27 14:58:16 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:50:14 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ typedef struct			s_trm
 }						t_trm;
 
 t_trm					*g_trm;
+
+void					ft_init_signals(void);
+//void					signal_handler(int signal);
 
 void					ft_print_usage(void);
 int						ft_printest(int);

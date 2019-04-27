@@ -6,18 +6,45 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 17:32:26 by tlandema          #+#    #+#             */
-/*   Updated: 2019/04/26 17:55:32 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:52:08 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_select.h"
+#include <sys/ioctl.h>
 
-void	signal_handler(int signal)
+static void	ft_suspend_signal_handler(void)
 {
-
+	ft_reset_term();
+	signal(SIGTSTP, SIG_DFL);
+	ioctl(STDERR_FILENO, TIOCSTI, "\x1A");
 }
 
-void	init_signal_handler(void)
+static void ft_stop_signal_handler(void)
+{
+	ft_reset_term();
+	//ft_final_free();
+	exit (1);
+}
+
+static void	signal_handler(int signal)
+{
+	if (signal == SIGWINCH)
+		ft_print_args();
+	else if (signal == SIGCONT)
+	{
+		ft_init_term();
+		ft_init_signals();
+		ft_print_args();
+	}
+	else if (signal == SIGABRT || signal == SIGSTOP || signal == SIGINT
+			|| signal == SIGKILL || signal ==SIGQUIT)
+		ft_stop_signal_handler();	
+	else if (signal == SIGTSTP)
+		ft_suspend_signal_handler();
+}
+
+void		ft_init_signals(void)
 {
 	signal(SIGWINCH, signal_handler);
 	signal(SIGABRT, signal_handler);
