@@ -6,24 +6,29 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 18:15:38 by tlandema          #+#    #+#             */
-/*   Updated: 2019/04/26 20:58:37 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/04/27 14:07:32 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_select.h"
 #include <sys/ioctl.h>
 
-void		ft_print_with_pad(char *name, int size)
+void		ft_print_with_pad(char *name, int size, int bol)
 {
 	int	i;
 
 	i = (int)ft_strlen(name);
 	ft_putstr_fd(name, STDERR_FILENO);
 	ft_putstr(tgetstr("me", NULL));
-	while (i <= size)
+	if (bol == 1)
+		ft_putchar('\n');
+	else
 	{
-		ft_putchar(' ');
-		i++;
+		while (i <= size)
+		{
+			ft_putchar(' ');
+			i++;
+		}
 	}
 }
 
@@ -43,7 +48,7 @@ void	ft_arg_size_max(t_trm *trm)
 		args = args->right;
 		i = 1;
 	}
-	trm->nb_p_l = (size_tab() / trm->size_max);
+	trm->nb_p_l = (size_tab() / (trm->size_max + 1));
 }
 
 int		size_tab(void)
