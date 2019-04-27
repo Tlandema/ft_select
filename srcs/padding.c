@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 18:15:38 by tlandema          #+#    #+#             */
-/*   Updated: 2019/04/27 14:54:31 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/04/27 16:24:09 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void	ft_arg_size_max(void)
 		args = args->right;
 		i = 1;
 	}
-	g_trm->nb_p_l = (size_tab() / (g_trm->size_max + 1));
+	if ((g_trm->nb_p_l = (size_tab() / (g_trm->size_max + 1))) == 0)
+		g_trm->nb_p_l = 1;
 }
 
 int		size_tab(void)

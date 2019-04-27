@@ -6,21 +6,19 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 11:38:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/04/27 14:58:35 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/04/27 16:54:56 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_select.h"
 
-static t_arg	*ft_create_arg(char *name)
+t_arg	*ft_create_arg(char *name, int select)
 {
 	t_arg	*arg;
 
 	arg = (t_arg *)ft_memalloc(sizeof(t_arg));
 	arg->name = ft_strdup(name);
-	arg->selected = 0;
-	ft_putstr(arg->name);
-	ft_putchar(' ');
+	arg->selected = select;
 	return (arg);
 }
 
@@ -30,7 +28,7 @@ static void	ft_argumenting(t_arg **arg, char *name, int count)
 
 	if (*arg == NULL)
 	{
-		*arg = ft_create_arg(name);
+		*arg = ft_create_arg(name, 0);
 		i++;
 		if (i == count)
 		{

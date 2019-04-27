@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 06:45:11 by tlandema          #+#    #+#             */
-/*   Updated: 2019/04/27 15:50:14 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/04/27 17:36:13 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ typedef struct			s_trm
 t_trm					*g_trm;
 
 void					ft_init_signals(void);
-//void					signal_handler(int signal);
 
 void					ft_print_usage(void);
 int						ft_printest(int);
@@ -52,6 +51,7 @@ void					ft_return_args(void);
 
 void					ft_arg_dealer(char **argv);
 void					ft_arg_size_max(void);
+t_arg					*ft_create_arg(char *name, int select);
 
 int						ft_looper(void);
 int						ft_key_press(long test);

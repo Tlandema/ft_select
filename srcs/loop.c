@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 13:45:32 by tlandema          #+#    #+#             */
-/*   Updated: 2019/04/27 14:57:28 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/04/27 16:37:10 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,11 @@ int		ft_looper(void)
 		ft_print_args();
 		test = 0;
 		read(0, &test, 8);
-		//ft_putnbr(test);
+		ft_putnbr(test);
 		ret = ft_key_press(test);
 		if (ret == 1)
 			return (1);
+		else if (ret == 2)
+			return (0);
 	}
 }
