@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 11:38:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/04/26 17:25:09 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/04/27 14:58:35 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_arg	*ft_create_arg(char *name)
 	return (arg);
 }
 
-static void	ft_argumenting(t_trm *trm, t_arg **arg, char *name, int count)
+static void	ft_argumenting(t_arg **arg, char *name, int count)
 {
 	static int i = 0;
 
@@ -34,26 +34,26 @@ static void	ft_argumenting(t_trm *trm, t_arg **arg, char *name, int count)
 		i++;
 		if (i == count)
 		{
-			(*arg)->right = trm->args;			
-			trm->args->left = *arg;
-			trm->the_arg = trm->args;
+			(*arg)->right = g_trm->args;			
+			g_trm->args->left = *arg;
+			g_trm->the_arg = g_trm->args;
 		}
 		return ;
 	}
 	else
 	{
-		ft_argumenting(trm, &(*arg)->right, name, count);
+		ft_argumenting(&(*arg)->right, name, count);
 		(*arg)->right->left = *arg;
 	}
 }
 
-void	ft_arg_dealer(t_trm *trm, char **argv)
+void	ft_arg_dealer(char **argv)
 {
 	int i;
 	int count;
 
 	i = 0;
-	trm->the_arg = (t_arg *)ft_memalloc(sizeof(t_arg));
+	g_trm->the_arg = (t_arg *)ft_memalloc(sizeof(t_arg));
 	count = ft_count_tab(argv);
 	while (argv[i])
 	{
@@ -63,21 +63,21 @@ void	ft_arg_dealer(t_trm *trm, char **argv)
 			exit(1);
 		}
 		else
-			ft_argumenting(trm, &trm->args, argv[i], count);
+			ft_argumenting(&g_trm->args, argv[i], count);
 		i++;
 	}
-	trm->the_arg = trm->args;
+	g_trm->the_arg = g_trm->args;
 }
 
-void	ft_return_args(t_trm *trm)
+void	ft_return_args(void)
 {
 	t_arg	*first;
 	t_arg	*args;
 	int		i;
 
 	i = 0;
-	first = trm->args;
-	args = trm->args;
+	first = g_trm->args;
+	args = g_trm->args;
 	while (args && (args != first || i == 0))
 	{
 		if (args->selected == 1)

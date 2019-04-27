@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 18:15:38 by tlandema          #+#    #+#             */
-/*   Updated: 2019/04/27 14:07:32 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/04/27 14:54:31 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,23 @@ void		ft_print_with_pad(char *name, int size, int bol)
 	}
 }
 
-void	ft_arg_size_max(t_trm *trm)
+void	ft_arg_size_max(void)
 {
 	t_arg	*args;
 	t_arg	*first;
 	int		i;
 
-	args = trm->args;
+	args = g_trm->args;
 	first = args;
 	i = 0;
 	while (args && (args != first || i == 0))
 	{
-		if ((int)ft_strlen(args->name) > trm->size_max)
-			trm->size_max = ft_strlen(args->name);
+		if ((int)ft_strlen(args->name) > g_trm->size_max)
+			g_trm->size_max = ft_strlen(args->name);
 		args = args->right;
 		i = 1;
 	}
-	trm->nb_p_l = (size_tab() / (trm->size_max + 1));
+	g_trm->nb_p_l = (size_tab() / (g_trm->size_max + 1));
 }
 
 int		size_tab(void)
