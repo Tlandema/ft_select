@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 11:38:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/04/28 17:44:05 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/04/28 19:26:53 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,23 +66,50 @@ void			ft_arg_dealer(char **argv)
 	g_trm->the_arg = g_trm->args;
 }
 
+static int		ft_count_select_arg(void)
+{
+	t_arg	*args;
+	t_arg	*first;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	args = g_trm->args;
+	first = args;
+	while (args && (args != first || i == 0))
+	{
+		if (args->selected == 1)
+			j++;
+		args = args->right;
+		i = 1;
+	}
+	return (j);
+}
+
 void			ft_return_args(void)
 {
 	t_arg	*first;
 	t_arg	*args;
 	int		i;
+	int		count_selected;
+	int		j;
 
+	j = 0;
 	i = 0;
 	first = g_trm->args;
 	args = g_trm->args;
+	count_selected = ft_count_select_arg();
 	while (args && (args != first || i == 0))
 	{
 		if (args->selected == 1)
 		{
 			ft_putstr_fd(args->name, STDOUT_FILENO);
-			ft_putchar_fd(' ', STDOUT_FILENO);
+			j++;
+			if (j != count_selected)
+				ft_putchar_fd(' ', STDOUT_FILENO);
 		}
 		args = args->right;
-		i = 1;
+		i++;
 	}
 }

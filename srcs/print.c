@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 14:21:49 by tlandema          #+#    #+#             */
-/*   Updated: 2019/04/28 17:41:17 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/04/28 19:50:00 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ static void	ft_print_with_pad(char *name, int size, int bol)
 	int i;
 
 	i = (int)ft_strlen(name);
-	ft_putstr_fd(name, STDERR_FILENO);
+
+	ft_color(name);
+	//ft_putstr_fd(name, STDERR_FILENO);
 	ft_putstr_fd(tgetstr("me", NULL), STDERR_FILENO);
 	if (bol == 1)
 		ft_putchar_fd('\n', STDERR_FILENO);
