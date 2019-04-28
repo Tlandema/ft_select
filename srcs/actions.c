@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 18:43:24 by tlandema          #+#    #+#             */
-/*   Updated: 2019/04/28 17:38:43 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/04/28 23:14:15 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ static void	ft_move_down(void)
 	actual = g_trm->the_arg;
 	while (i < g_trm->nb_p_l)
 	{
+		g_trm->the_arg = g_trm->the_arg->right;
+		i++;
 		if (g_trm->the_arg == g_trm->args && j != 0)
 		{
 			g_trm->the_arg = actual;
 			return ;
 		}
-		g_trm->the_arg = g_trm->the_arg->right;
-		i++;
 		j = 1;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 17:32:26 by tlandema          #+#    #+#             */
-/*   Updated: 2019/04/28 17:40:29 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/04/28 20:45:29 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	signal_handler(int signal)
 		ft_print_args();
 	}
 	else if (signal == SIGABRT || signal == SIGSTOP || signal == SIGINT
-			|| signal == SIGKILL || signal == SIGQUIT)
+			|| signal == SIGKILL || signal == SIGQUIT || signal == SIGTERM)
 		ft_stop_signal_handler();
 	else if (signal == SIGTSTP)
 		ft_suspend_signal_handler();
@@ -50,6 +50,7 @@ void		ft_init_signals(void)
 	signal(SIGABRT, signal_handler);
 	signal(SIGINT, signal_handler);
 	signal(SIGSTOP, signal_handler);
+	signal(SIGTERM, signal_handler);
 	signal(SIGCONT, signal_handler);
 	signal(SIGTSTP, signal_handler);
 	signal(SIGKILL, signal_handler);
