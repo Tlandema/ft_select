@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 17:32:26 by tlandema          #+#    #+#             */
-/*   Updated: 2019/04/27 15:52:08 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/04/28 17:40:29 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ static void	ft_suspend_signal_handler(void)
 	ioctl(STDERR_FILENO, TIOCSTI, "\x1A");
 }
 
-static void ft_stop_signal_handler(void)
+static void	ft_stop_signal_handler(void)
 {
 	ft_reset_term();
 	//ft_final_free();
-	exit (1);
+	exit(1);
 }
 
 static void	signal_handler(int signal)
@@ -38,8 +38,8 @@ static void	signal_handler(int signal)
 		ft_print_args();
 	}
 	else if (signal == SIGABRT || signal == SIGSTOP || signal == SIGINT
-			|| signal == SIGKILL || signal ==SIGQUIT)
-		ft_stop_signal_handler();	
+			|| signal == SIGKILL || signal == SIGQUIT)
+		ft_stop_signal_handler();
 	else if (signal == SIGTSTP)
 		ft_suspend_signal_handler();
 }

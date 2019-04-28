@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 13:51:59 by tlandema          #+#    #+#             */
-/*   Updated: 2019/04/11 13:57:33 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/04/28 17:17:19 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 int	ft_printest(int test)
 {
-	ft_putchar((char)test);
+	ft_putchar_fd((char)test, STDERR_FILENO);
 	return (0);
 }

@@ -6,13 +6,13 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 11:38:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/04/27 16:54:56 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/04/28 17:44:05 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_select.h"
 
-t_arg	*ft_create_arg(char *name, int select)
+static t_arg	*ft_create_arg(char *name, int select)
 {
 	t_arg	*arg;
 
@@ -22,7 +22,7 @@ t_arg	*ft_create_arg(char *name, int select)
 	return (arg);
 }
 
-static void	ft_argumenting(t_arg **arg, char *name, int count)
+static void		ft_argumenting(t_arg **arg, char *name, int count)
 {
 	static int i = 0;
 
@@ -32,7 +32,7 @@ static void	ft_argumenting(t_arg **arg, char *name, int count)
 		i++;
 		if (i == count)
 		{
-			(*arg)->right = g_trm->args;			
+			(*arg)->right = g_trm->args;
 			g_trm->args->left = *arg;
 			g_trm->the_arg = g_trm->args;
 		}
@@ -45,13 +45,12 @@ static void	ft_argumenting(t_arg **arg, char *name, int count)
 	}
 }
 
-void	ft_arg_dealer(char **argv)
+void			ft_arg_dealer(char **argv)
 {
 	int i;
 	int count;
 
 	i = 0;
-	g_trm->the_arg = (t_arg *)ft_memalloc(sizeof(t_arg));
 	count = ft_count_tab(argv);
 	while (argv[i])
 	{
@@ -67,7 +66,7 @@ void	ft_arg_dealer(char **argv)
 	g_trm->the_arg = g_trm->args;
 }
 
-void	ft_return_args(void)
+void			ft_return_args(void)
 {
 	t_arg	*first;
 	t_arg	*args;

@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 06:45:11 by tlandema          #+#    #+#             */
-/*   Updated: 2019/04/27 17:36:13 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/04/28 17:44:23 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,14 @@ void					ft_init_signals(void);
 void					ft_print_usage(void);
 int						ft_printest(int);
 void					ft_print_args(void);
-void					ft_print_with_pad(char *name, int size, int bol);
 void					ft_return_args(void);
 
 void					ft_arg_dealer(char **argv);
-void					ft_arg_size_max(void);
-t_arg					*ft_create_arg(char *name, int select);
 
 int						ft_looper(void);
 int						ft_key_press(long test);
 
 int						ft_init_term(void);
 int						ft_reset_term(void);
-
-int						size_tab(void);
 
 #endif
