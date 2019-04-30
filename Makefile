@@ -6,7 +6,7 @@
 #    By: tlandema <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by tlandema          #+#    #+#              #
-#    Updated: 2019/04/28 19:39:37 by tlandema         ###   ########.fr        #
+#    Updated: 2019/04/30 06:53:08 by tlandema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCS_PATH = srcs
 SRCS = main.c \
 	   usage.c \
 	   actions.c \
+	   header.c \
 	   color.c \
 	   signals.c \
 	   args.c \
@@ -71,13 +72,13 @@ COM_STRING   = "Compiling"
 
 all: $(NAME)
 
-$(NAME): $(INC) $(D_OBJS) lib
+$(NAME): lib $(D_OBJS)
 	@$(call run_and_test, $(CC) $(CFLAGS) -ltermcap -o $(NAME) -I$(INC) $(D_OBJS) -L./$(LIB_PATH) -lft)
 
 $(OBJS_PATH)/%.o: $(SRCS_PATH)/%.c
 	@$(call run_and_test, $(CC) $(CFLAGS) -o $@ -c $< -I$(LIB_PATH))
 
-lib :
+lib:
 	@$(call run_and_test, make -C libft)
 
 clean:

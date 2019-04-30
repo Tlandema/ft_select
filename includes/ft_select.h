@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 06:45:11 by tlandema          #+#    #+#             */
-/*   Updated: 2019/04/28 19:30:16 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/04/30 06:53:51 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,10 @@ int						ft_key_press(long test);
 
 int						ft_init_term(void);
 int						ft_reset_term(void);
+
+int						col_number(void);
+void					ft_header(void);
+
+void					ft_big_free(void);
 
 #endif

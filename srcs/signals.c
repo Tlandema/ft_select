@@ -6,7 +6,7 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 17:32:26 by tlandema          #+#    #+#             */
-/*   Updated: 2019/04/28 20:45:29 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/04/30 04:20:36 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	ft_suspend_signal_handler(void)
 static void	ft_stop_signal_handler(void)
 {
 	ft_reset_term();
-	//ft_final_free();
+	ft_big_free();
 	exit(1);
 }
 

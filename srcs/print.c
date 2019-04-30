@@ -6,14 +6,14 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 14:21:49 by tlandema          #+#    #+#             */
-/*   Updated: 2019/04/29 00:02:05 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/04/30 04:32:26 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_select.h"
 #include <sys/ioctl.h>
 
-static int	size_tab(void)
+int			col_number(void)
 {
 	struct winsize	w;
 
@@ -25,26 +25,32 @@ static void	ft_arg_size_max(void)
 {
 	t_arg	*args;
 	int		i;
+	int		j;
 
 	args = g_trm->args;
 	i = 0;
+	j = 0;
 	while (args && (args != g_trm->args || i == 0))
 	{
 		if ((int)ft_strlen(args->name) > g_trm->size_max)
 			g_trm->size_max = ft_strlen(args->name);
 		args = args->right;
 		i = 1;
+		j++;
 	}
-	if ((g_trm->nb_p_l = (size_tab() / (g_trm->size_max + 1))) == 0)
+	if ((g_trm->nb_p_l = (col_number() / (g_trm->size_max + 1))) == 0)
 		g_trm->nb_p_l = 1;
+	if (g_trm->nb_p_l > j)
+		g_trm->nb_p_l = j;
 }
 
 static void	ft_print_with_pad(char *name, int size, int bol)
 {
-	int i;
+	int	i;
+	int	j;
 
+	j = -1;
 	i = (int)ft_strlen(name);
-
 	ft_color(name);
 	ft_putstr_fd(tgetstr("me", NULL), STDERR_FILENO);
 	if (bol == 1)
@@ -70,6 +76,7 @@ void		ft_print_args(void)
 	j = 0;
 	args = g_trm->args;
 	ft_putstr_fd(tgetstr("cl", NULL), STDERR_FILENO);
+	ft_header();
 	while (args && (args != g_trm->args || i == 0))
 	{
 		if (args->selected == 1)
