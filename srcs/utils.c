@@ -6,14 +6,14 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/11 13:51:59 by tlandema          #+#    #+#             */
-/*   Updated: 2019/04/28 17:17:19 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/05/01 11:15:05 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_select.h"
 
-int	ft_printest(int test)
+int	ft_printest(int yes)
 {
-	ft_putchar_fd((char)test, STDERR_FILENO);
+	ft_putchar_fd((char)yes, STDERR_FILENO);
 	return (0);
 }

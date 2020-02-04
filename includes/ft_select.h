@@ -6,19 +6,19 @@
 /*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 06:45:11 by tlandema          #+#    #+#             */
-/*   Updated: 2019/04/30 06:53:51 by tlandema         ###   ########.fr       */
+/*   Updated: 2019/05/08 13:14:52 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_SELECT_H
 # define FT_SELECT_H
 
-#include "../libft/includes/libft.h"
-#include "../libft/includes/ft_printf.h"
-#include <termios.h>
-#include <termcap.h>
-#include <unistd.h>
-#include <stdlib.h>
+# include "../libft/includes/libft.h"
+# include "../libft/includes/ft_printf.h"
+# include <termios.h>
+# include <termcap.h>
+# include <unistd.h>
+# include <stdlib.h>
 
 typedef struct			s_arg
 {
@@ -44,7 +44,7 @@ t_trm					*g_trm;
 void					ft_init_signals(void);
 
 void					ft_print_usage(void);
-int						ft_printest(int);
+int						ft_printest(int yes);
 void					ft_print_args(void);
 void					ft_return_args(void);
 
