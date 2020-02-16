@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 18:43:24 by tlandema          #+#    #+#             */
-/*   Updated: 2019/04/29 08:48:35 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/16 05:05:47 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ static int	ft_delete_arg(void)
 	g_trm->the_arg->left->right = g_trm->the_arg->right;
 	g_trm->the_arg->right->left = g_trm->the_arg->left;
 	g_trm->the_arg = g_trm->the_arg->right;
-	free(tmp->name);
-	free(tmp);
+	ft_strdel(&tmp->name);
+	ft_memdel((void **)&tmp);
 	return (0);
 }
 

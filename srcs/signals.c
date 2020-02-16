@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/26 17:32:26 by tlandema          #+#    #+#             */
-/*   Updated: 2019/04/30 04:20:36 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/16 04:43:39 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ static void	ft_suspend_signal_handler(void)
 static void	ft_stop_signal_handler(void)
 {
 	ft_reset_term();
-	ft_big_free();
-	exit(1);
+	exit(ft_big_free(1));
 }
 
 static void	signal_handler(int signal)

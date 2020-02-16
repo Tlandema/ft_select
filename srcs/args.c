@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   args.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tlandema <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 11:38:36 by tlandema          #+#    #+#             */
-/*   Updated: 2019/04/29 00:00:37 by tlandema         ###   ########.fr       */
+/*   Updated: 2020/02/16 05:06:48 by tlandema         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,25 @@ static t_arg	*ft_create_arg(char *name, int select)
 {
 	t_arg	*arg;
 
-	arg = (t_arg *)ft_memalloc(sizeof(t_arg));
-	arg->name = ft_strdup(name);
+	if ((arg = (t_arg *)ft_memalloc(sizeof(t_arg))) == NULL)
+		return (NULL);
+	if ((arg->name = ft_strdup(name)) == NULL)
+	{
+		ft_memdel((void **)&arg);
+		return (NULL);
+	}
 	arg->selected = select;
 	return (arg);
 }
 
-static void		ft_argumenting(t_arg **arg, char *name, int count)
+static int8_t	ft_argumenting(t_arg **arg, char *name, int count)
 {
 	static int i = 0;
 
 	if (*arg == NULL)
 	{
-		*arg = ft_create_arg(name, 0);
+		if ((*arg = ft_create_arg(name, 0)) == NULL)
+			return (FAILURE);
 		i++;
 		if (i == count)
 		{
@@ -36,16 +42,17 @@ static void		ft_argumenting(t_arg **arg, char *name, int count)
 			g_trm->args->left = *arg;
 			g_trm->the_arg = g_trm->args;
 		}
-		return ;
 	}
 	else
 	{
-		ft_argumenting(&(*arg)->right, name, count);
+		if (ft_argumenting(&(*arg)->right, name, count) == FAILURE)
+			return (FAILURE);
 		(*arg)->right->left = *arg;
 	}
+	return (SUCCESS);
 }
 
-void			ft_arg_dealer(char **argv)
+int8_t			ft_arg_dealer(char **argv)
 {
 	int i;
 	int count;
@@ -57,13 +64,14 @@ void			ft_arg_dealer(char **argv)
 		if (!argv[i][0])
 		{
 			ft_putstr("You can't select nothing...\n");
-			exit(1);
+			exit(ft_big_free(1));
 		}
-		else
-			ft_argumenting(&g_trm->args, argv[i], count);
+		else if (ft_argumenting(&g_trm->args, argv[i], count) == FAILURE)
+			return (FAILURE);
 		i++;
 	}
 	g_trm->the_arg = g_trm->args;
+	return (SUCCESS);
 }
 
 static int		ft_count_select_arg(void)
