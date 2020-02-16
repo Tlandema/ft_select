@@ -3,14 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tlandema <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: tlandema <tlandema@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 12:04:00 by tlandema          #+#    #+#              #
-#    Updated: 2019/04/30 06:53:08 by tlandema         ###   ########.fr        #
+#    Updated: 2020/02/16 05:38:35 by tlandema         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_select
+BINARY = $(NAME)
 
 CC = gcc
 
@@ -34,9 +35,11 @@ SRCS = main.c \
 	   utils.c \
 	   print.c \
 	   loop.c \
-	   term.c 
+	   term.c
 
 OBJS_PATH = obj
+
+D_LIB = $(addprefix $(LIB_PATH)/, $(LIB))
 
 OBJS = $(SRCS:.c=.o)
 
@@ -49,42 +52,37 @@ ERROR_COLOR = \033[0;31m
 WARN_COLOR  = \033[0;33m
 NO_COLOR    = \033[m
 
-define run_and_test
-printf "%b" "$(COM_COLOR)$(COM_STRING) $(OBJ_COLOR)$(@F)$(NO_COLOR)\r"; \
-	$(1) 2> $@.log; \
-	RESULT=$$?; \
-	if [ $$RESULT -ne 0 ]; then \
-	printf "%-60b%b" "$(COM_COLOR)$(BACK_COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $@" "$(ERROR_COLOR)$(ERROR_STRING)$(NO_COLOR)\n"   ; \
-	elif [ -s $@.log ]; then \
-	printf "%-60b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $@" "$(WARN_COLOR)$(WARN_STRING)$(NO_COLOR)\n"   ; \
-	else  \
-	printf "%-60b%b" "$(COM_COLOR)$(COM_STRING)$(OBJ_COLOR) $(@F)" "$(OK_COLOR)$(OK_STRING)$(NO_COLOR)\n"   ; \
-	fi; \
-	cat $@.log; \
-	rm -f $@.log; \
-	exit $$RESULT
-endef
+GREEN		= \033[0;32m
+RED			= \033[0;31m
+RESET		= \033[0m
 
-OK_STRING    = "[OK]"
-ERROR_STRING = "[ERROR]"
-WARN_STRING  = "[WARNING]"
-COM_STRING   = "Compiling"
+BIN_STRING  = Binary
+DEL_STRING = Deleted.
+CREA_STRING = Created.
+COM_STRING = Compiled.
+
+.PHONY: all fcean clean re
+.SILENT:
 
 all: $(NAME)
 
-$(NAME): lib $(D_OBJS)
-	@$(call run_and_test, $(CC) $(CFLAGS) -ltermcap -o $(NAME) -I$(INC) $(D_OBJS) -L./$(LIB_PATH) -lft)
+$(NAME): $(INC) $(D_OBJS) $(D_LIB)
+	$(CC) $(CFLAGS) -ltermcap -o $(NAME) -I$(INC) $(D_OBJS) -L./$(LIB_PATH) -lft
+	printf "%-20b%-60b%b" "$(BINARY):" "$(GREEN)$(BIN_STRING)" "$(COM_STRING)$(RESET)\n"
 
 $(OBJS_PATH)/%.o: $(SRCS_PATH)/%.c
-	@$(call run_and_test, $(CC) $(CFLAGS) -o $@ -c $< -I$(LIB_PATH))
+	$(CC) $(CFLAGS) -o $@ -c $< -I$(LIB_PATH)
+	printf "%-20b%-60b%b" "$(BINARY):" "$(GREEN)$@" "$(CREA_STRING)$(RESET)\r"
 
-lib:
-	@$(call run_and_test, make -C libft)
+$(D_LIB) :
+	@make -C libft
 
 clean:
-	@$(call run_and_test, rm -f $(D_OBJS) && make clean -C libft)
+	rm -f $(D_OBJS) && make clean -C libft
+	printf "%-20b%-60b%b" "$(BINARY):" "$(RED)$(OBJS_PATH)" "$(DEL_STRING)$(RESET)\n"
 
 fclean: clean
-	@$(call run_and_test, rm -f $(NAME) && rm -f libft/libft.a)
+	rm -f $(NAME) && rm -f libft/libft.a
+	printf "%-20b%-60b%b" "$(BINARY):" "$(RED)$(BIN_STRING)" "$(DEL_STRING)$(RESET)\n"
 
 re: fclean all
